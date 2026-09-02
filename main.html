@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huỳnh Tấn Dũng — UI/UX Designer &amp; Software Developer</title>
+
+    <!-- Google Fonts: DM Serif Display, Caveat (Handwritten Doodles), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#f5f1ea',
+                        paperDark: '#ece7dd',
+                        charcoal: '#18181b',
+                        charcoalCard: '#212124',
+                        doodle: '#6366f1',
+                        doodleLight: '#a5b4fc',
+                        ink: '#111827',
+                        inkMuted: '#52525b'
+                    },
+                    fontFamily: {
+                        serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+                        hand: ['"Caveat"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Smooth Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #18181b; }
+        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 3px; }
+
+        /* Gentle floating animation for doodles */
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(-1deg); }
+        }
+        .doodle-float {
+            animation: float-gentle 4s ease-in-out infinite;
+        }
+
+        /* Paper subtle texture effect */
+        .paper-grain {
+            background-color: #f5f1ea;
+            background-image: radial-gradient(#d6cfbf 0.75px, transparent 0.75px);
+            background-size: 20px 20px;
+        }
+
+        .charcoal-grain {
+            background-color: #18181b;
+            background-image: radial-gradient(#27272a 0.75px, transparent 0.75px);
+            background-size: 20px 20px;
+        }
+
+        /* Interactive Phone Frame */
+        .phone-frame {
+            border: 8px solid #27272a;
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .phone-notch {
+            width: 80px;
+            height: 18px;
+            background: #27272a;
+            border-radius: 0 0 12px 12px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-charcoal text-ink font-sans antialiased selection:bg-doodle selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-charcoal text-white border border-doodle/50 px-5 py-3 rounded-2xl shadow-2xl">
+        <span class="text-doodleLight text-lg">✦</span>
+        <span id="toast-message" class="text-xs font-mono font-medium">Copied to clipboard</span>
+    </div>
+
+    <!-- ================= SECTION 0: HERO TOP (CHARCOAL AESTHETIC) ================= -->
+    <header class="charcoal-grain text-white pt-8 pb-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-800 relative overflow-hidden">
+        
+        <!-- Top Nav Bar -->
+        <div class="max-w-5xl mx-auto flex items-center justify-between text-xs font-mono text-zinc-400 pb-12 border-b border-zinc-800/80">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="tracking-wider uppercase text-[11px] text-zinc-300">Available &bull; Singapore / Remote</span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px]">
+                <a href="#projects" class="hover:text-doodleLight transition-colors">[Projects]</a>
+                <a href="#skills" class="hover:text-doodleLight transition-colors">[Skills]</a>
+                <a href="#contact" class="hover:text-doodleLight transition-colors">[Contact]</a>
+                <button onclick="window.print()" class="px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 hover:border-doodle text-white transition-all">
+                    Resume (PDF)
+                </button>
+            </div>
+        </div>
+
+        <!-- Giant Editorial Serif Header -->
+        <div class="max-w-4xl mx-auto text-center pt-16 pb-8 relative">
+            
+            <!-- Hand-written Top Intro Sticker -->
+            <div class="inline-block relative">
+                <span class="font-hand text-2xl sm:text-3xl text-doodleLight -rotate-2 inline-block font-semibold">
+                    UI/UX Designer &amp; Software Developer
+                </span>
+                <!-- Squiggly doodle arrow -->
+                <svg class="w-16 h-8 text-doodleLight absolute -right-14 top-1 hidden sm:block doodle-float" viewBox="0 0 64 32" fill="none" stroke="currentColor">
+                    <path d="M4 20C18 8 36 28 58 12M58 12L50 11M58 12L56 19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- Main Title "Portfolio" -->
+            <h1 class="text-6xl sm:text-8xl lg:text-9xl font-serif tracking-tight text-white my-4 relative">
+                Portfolio
+                <!-- Hand-drawn Scribbled Underline Loop -->
+                <svg class="w-72 sm:w-96 h-10 mx-auto text-doodle stroke-current -mt-3 sm:-mt-5" viewBox="0 0 320 40" fill="none">
+                    <path d="M8 24C65 10 240 6 312 20C215 36 78 30 18 34" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </h1>
+
+            <!-- Candidate Pill with Hand-Drawn Circle -->
+            <div class="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full border border-doodle/60 bg-zinc-900/80 text-doodleLight font-hand text-xl font-bold tracking-wide">
+                <span>✦ Huỳnh Tấn Dũng &bull; (2022 – 2026) ✦</span>
+            </div>
+
+            <!-- Subtitle -->
+            <p class="max-w-xl mx-auto mt-6 text-sm sm:text-base text-zinc-400 font-light font-sans leading-relaxed">
+                4 years architecting digital aviation systems for <strong class="text-white font-medium">Singapore Airlines</strong> and <strong class="text-white font-medium">Scoot</strong>. Blending human-centered design craft with production software engineering.
+            </p>
+        </div>
+    </header>
+
+    <!-- ================= SECTION 1: HELLO (CREAM PAPER AESTHETIC) ================= -->
+    <section class="paper-grain text-ink py-20 px-4 sm:px-6 lg:px-8 border-b border-stone-300 relative">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left: Avatar Polaroid with Hand-drawn Squiggle Rings -->
+            <div class="md:col-span-5 flex justify-center relative">
+                <div class="relative group">
+                    
+                    <!-- Decorative hand-drawn star doodles -->
+                    <span class="absolute -top-6 -left-6 font-hand text-doodle text-3xl font-bold doodle-float">✦</span>
+                    <span class="absolute top-2 -right-8 font-hand text-doodle text-2xl font-bold">✨</span>
+                    <span class="absolute -bottom-6 -right-4 font-hand text-doodle text-xl">"Nice to meet you!"</span>
+
+                    <!-- Hand-drawn SVG frame orbit -->
+                    <svg class="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] text-doodle pointer-events-none -rotate-2" viewBox="0 0 240 280" fill="none" stroke="currentColor">
+                        <path d="M20 30 C 80 5, 180 15, 220 40 C 240 100, 235 220, 210 260 C 150 280, 50 275, 20 240 C -5 180, 0 80, 20 30 Z" stroke-width="2" stroke-dasharray="6 4"/>
+                    </svg>
+
+                    <!-- Avatar Box -->
+                    <div class="w-56 h-64 bg-white p-3 rounded-2xl shadow-xl border border-stone-200 rotate-1 transform group-hover:rotate-0 transition-transform">
+                        <div class="w-full h-48 rounded-xl bg-gradient-to-tr from-stone-900 to-zinc-700 flex items-center justify-center text-white font-serif text-4xl font-bold relative overflow-hidden">
+                            <span>HTD</span>
+                            <!-- Hand drawn badge overlay -->
+                            <div class="absolute bottom-2 left-2 right-2 bg-charcoal/80 backdrop-blur-md rounded-lg py-1 px-2 text-center">
+                                <span class="font-hand text-sm text-doodleLight">Product Designer &bull; SG/VN</span>
+                            </div>
+                        </div>
+                        <div class="text-center mt-2 font-hand text-lg text-ink font-bold">
+                            Huỳnh Tấn Dũng
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right: Editorial Introduction Text -->
+            <div class="md:col-span-7 space-y-4">
+                <div class="inline-block relative">
+                    <h2 class="text-4xl sm:text-5xl font-serif text-ink tracking-tight">
+                        Hello,
+                    </h2>
+                    <!-- Hand-written callout note -->
+                    <span class="font-hand text-xl text-doodle absolute -top-4 -right-28 font-semibold hidden sm:inline-block">
+                        // about my journey ✎
+                    </span>
+                </div>
+
+                <p class="text-sm sm:text-base text-stone-700 leading-relaxed font-light">
+                    I am a <strong class="text-ink font-semibold">Dual-Discipline Product Designer and Software Engineer</strong> based in Ho Chi Minh City, actively collaborating with aviation and tech teams in Singapore. Over the past 4 years, I have shaped high-impact passenger touchpoints for <strong class="text-ink font-semibold">Singapore Airlines (SIA)</strong> and <strong class="text-ink font-semibold">Scoot</strong>.
+                </p>
+
+                <p class="text-sm sm:text-base text-stone-700 leading-relaxed font-light">
+                    My approach is grounded in <strong class="text-ink font-medium">engineering-aware design</strong>: I bridge Figma auto-layouts, tokens, and complex edge cases directly with React, TypeScript, and TestFlight release pipelines. No handoff friction, zero guesswork for developers.
+                </p>
+
+                <!-- Impact Badges with Hand-Drawn Underlines -->
+                <div class="pt-4 grid grid-cols-3 gap-4 border-t border-stone-300 font-mono text-xs">
+                    <div>
+                        <div class="text-2xl font-serif text-ink font-bold">4+ Yrs</div>
+                        <div class="text-[11px] text-stone-500 uppercase mt-0.5">SIA &amp; Scoot Track</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-serif text-doodle font-bold">-30%</div>
+                        <div class="text-[11px] text-stone-500 uppercase mt-0.5">Handoff Friction</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-serif text-emerald-600 font-bold">120+</div>
+                        <div class="text-[11px] text-stone-500 uppercase mt-0.5">TestFlight Builds</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= SECTION 2: EDUCATION & RESUME (CREAM PAPER) ================= -->
+    <section class="paper-grain text-ink py-16 px-4 sm:px-6 lg:px-8 border-b border-stone-300">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+            
+            <!-- Left: Education Narrative -->
+            <div class="md:col-span-7 space-y-4">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-3xl sm:text-4xl font-serif text-ink">Education &amp; Foundations</h2>
+                    <span class="font-hand text-xl text-doodle font-semibold">01 / Degree</span>
+                </div>
+
+                <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-stone-300 shadow-sm space-y-3 relative">
+                    <!-- Circle doodle around Degree -->
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-lg font-serif font-bold text-ink">Bachelor of Information Technology</h3>
+                            <p class="text-xs font-mono text-doodle font-semibold">Major: Software Engineering &amp; Human-Computer Interaction (HCI)</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 font-mono text-xs">2018–2022</span>
+                    </div>
+                    <p class="text-xs text-stone-600 font-light leading-relaxed">
+                        Rigorous focus on user interface ergonomics, responsive frontend architectures, component systems, and algorithmic thinking.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-2 text-[11px] font-mono text-stone-500">
+                        <span class="px-2 py-0.5 rounded bg-stone-100">&bull; Vietnam Web Summit Attendee</span>
+                        <span class="px-2 py-0.5 rounded bg-stone-100">&bull; Agile / Scrum Certified</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive QR Code & Resume Download -->
+            <div class="md:col-span-5 flex flex-col items-center text-center relative">
+                
+                <!-- Hand-drawn arrow pointing to QR -->
+                <div class="font-hand text-xl text-doodle mb-1 flex items-center gap-1 font-semibold">
+                    <span>Scan or click for full CV!</span>
+                    <svg class="w-6 h-6 text-doodle inline -rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <!-- Card container -->
+                <div class="bg-white p-5 rounded-2xl border-2 border-stone-300 shadow-lg relative group hover:border-doodle transition-all">
+                    <!-- Simulated Clean QR Matrix SVG -->
+                    <div class="w-36 h-36 bg-stone-900 rounded-xl p-2.5 flex items-center justify-center mx-auto text-white">
+                        <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="currentColor">
+                            <!-- Outer Corners -->
+                            <rect x="10" y="10" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+                            <rect x="17" y="17" width="10" height="10" fill="currentColor"/>
+                            <rect x="66" y="10" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+                            <rect x="73" y="17" width="10" height="10" fill="currentColor"/>
+                            <rect x="10" y="66" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+                            <rect x="17" y="73" width="10" height="10" fill="currentColor"/>
+                            <!-- Inner patterns -->
+                            <rect x="42" y="15" width="8" height="8" rx="2"/>
+                            <rect x="48" y="30" width="8" height="8" rx="2"/>
+                            <rect x="42" y="44" width="16" height="16" rx="3" fill="#6366f1"/>
+                            <rect x="15" y="44" width="8" height="8" rx="2"/>
+                            <rect x="70" y="44" width="8" height="8" rx="2"/>
+                            <rect x="42" y="72" width="12" height="8" rx="2"/>
+                            <rect x="66" y="72" width="18" height="18" rx="3"/>
+                        </svg>
+                    </div>
+
+                    <div class="mt-3 font-mono text-[11px] text-stone-600">
+                        <div class="font-bold text-ink text-xs">Huynh Tan Dung CV</div>
+                        <div class="text-doodle mt-0.5">Updated: ATS-Ready PDF</div>
+                    </div>
+
+                    <button onclick="window.print()" class="mt-3 w-full py-2 rounded-xl bg-charcoal hover:bg-doodle text-white font-mono text-xs font-semibold transition-all">
+                        Download PDF &darr;
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= SECTION 3: SKILLS (CREAM PAPER TO LIGHT TONE) ================= -->
+    <section id="skills" class="paper-grain text-ink py-20 px-4 sm:px-6 lg:px-8 border-b border-stone-300">
+        <div class="max-w-5xl mx-auto">
+            
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-8 gap-2">
+                <div>
+                    <h2 class="text-4xl sm:text-5xl font-serif text-ink tracking-tight">Skills &amp; Toolbox</h2>
+                    <p class="text-xs font-mono text-stone-500 mt-1">THE INTERSECTION OF DESIGN CRAFT &amp; CODE RELIABILITY</p>
+                </div>
+                <span class="font-hand text-2xl text-doodle -rotate-1 font-semibold">
+                    "Tools are just vessels, systems matter most" ✎
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left: Software & Design System Chips -->
+                <div class="md:col-span-5 space-y-6">
+                    
+                    <!-- Design Pillar -->
+                    <div class="bg-white p-5 rounded-2xl border border-stone-300 shadow-sm relative">
+                        <span class="font-hand text-lg text-doodle font-bold absolute -top-3 right-4 bg-white px-2 rounded-full border border-stone-200">
+                            Figma Native 🎨
+                        </span>
+                        <h3 class="font-serif text-xl font-bold text-ink mb-3">UI/UX Architecture</h3>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono">
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200 font-semibold text-doodle">Figma Variables</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">Design Tokens</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">User Flows &amp; IA</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">Edge-case UX</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">WCAG 2.1 AA</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">Prototyping</span>
+                        </div>
+                    </div>
+
+                    <!-- Development Pillar -->
+                    <div class="bg-white p-5 rounded-2xl border border-stone-300 shadow-sm relative">
+                        <span class="font-hand text-lg text-emerald-600 font-bold absolute -top-3 right-4 bg-white px-2 rounded-full border border-stone-200">
+                            Production Ready ⚡
+                        </span>
+                        <h3 class="font-serif text-xl font-bold text-ink mb-3">Frontend &amp; Mobile</h3>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono">
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200 font-semibold text-emerald-700">React &amp; Next.js</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">TypeScript</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">Tailwind CSS</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">Apple TestFlight</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">iOS / Android</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200">REST APIs &amp; JSON</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right: Interactive Live Token Tester (Doodle Box) -->
+                <div class="md:col-span-7 bg-white p-6 rounded-3xl border-2 border-stone-300 shadow-xl relative">
+                    
+                    <div class="flex items-center justify-between pb-3 border-b border-stone-200 mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            <span class="font-mono text-xs text-stone-500 ml-2">token-sandbox.tsx</span>
+                        </div>
+                        <span class="font-hand text-lg text-doodle font-bold">&larr; Try adjusting live!</span>
+                    </div>
+
+                    <!-- Target Preview Button -->
+                    <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 text-center space-y-4">
+                        <div class="text-xs font-mono text-stone-500 uppercase">Live Token Synchronizer</div>
+                        
+                        <button id="token-test-button" class="px-8 py-3.5 bg-doodle text-white font-serif text-lg tracking-wide shadow-md transition-all active:scale-95" style="border-radius: 12px;">
+                            Singapore Airlines &bull; Confirm Booking
+                        </button>
+
+                        <div class="space-y-2 pt-2 text-xs font-mono">
+                            <div class="flex justify-between text-stone-600">
+                                <span>Border Radius (--radius-token):</span>
+                                <span id="token-radius-label" class="font-bold text-ink">12px</span>
+                            </div>
+                            <input type="range" min="0" max="32" value="12" oninput="changeTokenRadius(this.value)" class="w-full accent-doodle cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Generated Token Code -->
+                    <pre class="mt-4 p-3.5 rounded-xl bg-charcoal text-doodleLight font-mono text-[11px] overflow-x-auto leading-relaxed">
+<span class="text-stone-400">// Synchronized Figma Variables to Tailwind</span>
+export const themeConfig = {
+  brand: "Singapore Airlines &amp; Scoot",
+  radius: "<span id="token-code-radius">12px</span>",
+  wcagContrast: "PASS_AAA (7.8:1)"
+};</pre>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= SECTION 4: PROJECTS (CHARCOAL DARK CANVAS) ================= -->
+    <section id="projects" class="charcoal-grain text-white py-24 px-4 sm:px-6 lg:px-8 border-b border-zinc-800 relative">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Projects Header -->
+            <div class="text-center mb-16 relative">
+                <span class="font-hand text-2xl sm:text-3xl text-doodleLight -rotate-2 inline-block font-semibold">
+                    Selected Case Studies &bull; (Aviation Focus)
+                </span>
+                <h2 class="text-5xl sm:text-7xl font-serif tracking-tight text-white mt-2">
+                    Projects.
+                </h2>
+                <!-- Doodle Star -->
+                <span class="font-hand text-doodle text-4xl font-bold absolute right-1/4 top-0">✦</span>
+                <p class="max-w-xl mx-auto mt-3 text-xs sm:text-sm text-zinc-400 font-light">
+                    Real-world systems deployed at scale for millions of passengers across Asia-Pacific.
+                </p>
+            </div>
+
+            <!-- ================= PROJECT 01: SINGAPORE AIRLINES PASSENGER ECOSYSTEM ================= -->
+            <div class="mb-24 bg-charcoalCard border border-zinc-700/80 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+                
+                <!-- Hand-drawn Project Badge -->
+                <div class="flex flex-wrap items-center justify-between pb-6 border-b border-zinc-800 gap-4">
+                    <div>
+                        <span class="font-hand text-xl text-doodleLight font-bold">// Exhibit 01 &bull; Enterprise Passenger Flow</span>
+                        <h3 class="text-3xl sm:text-4xl font-serif text-white mt-1">
+                            Singapore Airlines &bull; Seat Selection &amp; Booking Funnel
+                        </h3>
+                    </div>
+                    <!-- Cabin Class Switcher -->
+                    <div class="flex items-center gap-2 bg-zinc-900 p-1.5 rounded-2xl border border-zinc-700 text-xs font-mono">
+                        <span class="text-zinc-400 px-2 text-[11px]">Class:</span>
+                        <button onclick="switchCabinClass('Economy')" id="cabin-btn-econ" class="px-3 py-1 rounded-xl bg-doodle text-white font-bold transition-all">Economy</button>
+                        <button onclick="switchCabinClass('Business')" id="cabin-btn-biz" class="px-3 py-1 rounded-xl text-zinc-400 hover:text-white transition-all">Business</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-8">
+                    
+                    <!-- Left: Description & Metrics -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <p class="text-sm text-zinc-300 font-light leading-relaxed">
+                            <strong class="text-white font-medium">The Challenge:</strong> Legacy long-haul seat maps suffered from high cognitive load on mobile viewports, leading to cart drop-offs during ancillary seat upgrades.
+                        </p>
+                        <p class="text-sm text-zinc-300 font-light leading-relaxed">
+                            <strong class="text-white font-medium">Design Solution:</strong> Re-architected seat selection into a progressive disclosure model with tactile seat selection, strict WCAG 2.1 AA accessibility contrast, and sub-second rendering.
+                        </p>
+
+                        <!-- Metric Tiles with Scribble accents -->
+                        <div class="grid grid-cols-3 gap-3 pt-3 font-mono text-center">
+                            <div class="p-3 rounded-2xl bg-zinc-900 border border-zinc-800">
+                                <div class="text-xl font-serif text-white font-bold">-30%</div>
+                                <div class="text-[10px] text-zinc-400 uppercase mt-0.5">Handoff Time</div>
+                            </div>
+                            <div class="p-3 rounded-2xl bg-zinc-900 border border-zinc-800">
+                                <div class="text-xl font-serif text-doodleLight font-bold">+18%</div>
+                                <div class="text-[10px] text-zinc-400 uppercase mt-0.5">Upgrade Conversion</div>
+                            </div>
+                            <div class="p-3 rounded-2xl bg-zinc-900 border border-zinc-800">
+                                <div class="text-xl font-serif text-emerald-400 font-bold">100%</div>
+                                <div class="text-[10px] text-zinc-400 uppercase mt-0.5">WCAG 2.1 AA</div>
+                            </div>
+                        </div>
+
+                        <!-- Handwritten Note Sticker -->
+                        <div class="pt-2">
+                            <span class="font-hand text-lg text-doodleLight">
+                                ✎ "Directly synced Figma Variables to React Props without UI debt."
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Interactive Mobile Mockup Card -->
+                    <div class="lg:col-span-6 flex justify-center relative">
+                        
+                        <!-- Hand-drawn arrow pointing to ticket -->
+                        <span class="font-hand text-xl text-doodleLight absolute -top-6 right-6 hidden sm:block">
+                            Interactive boarding pass! &darr;
+                        </span>
+
+                        <div class="w-full max-w-sm bg-white text-zinc-900 rounded-3xl p-6 shadow-2xl border-t-8 border-doodle relative" id="sia-ticket-card">
+                            <div class="flex items-center justify-between pb-3 border-b border-zinc-100">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-lg bg-zinc-900 text-white flex items-center justify-center font-mono font-bold text-xs">SQ</div>
+                                    <div>
+                                        <div class="text-xs font-bold text-zinc-900">Singapore Airlines</div>
+                                        <div class="text-[10px] font-mono text-zinc-500">SQ 322 &bull; Changi T3</div>
+                                    </div>
+                                </div>
+                                <span id="cabin-tier-tag" class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-doodle text-[10px] font-mono font-bold uppercase">
+                                    Economy Class
+                                </span>
+                            </div>
+
+                            <div class="py-4 flex items-center justify-between">
+                                <div>
+                                    <div class="text-2xl font-serif font-bold text-zinc-900">SIN</div>
+                                    <div class="text-[10px] text-zinc-500">Singapore Changi</div>
+                                    <div class="text-xs font-mono font-bold text-zinc-800 mt-0.5">23:45 SGT</div>
+                                </div>
+                                <div class="text-center font-mono text-[9px] text-zinc-400">
+                                    <span>13h 25m</span>
+                                    <div class="w-16 h-px bg-zinc-300 my-1"></div>
+                                    <span class="text-emerald-600 font-bold">Non-stop</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-serif font-bold text-zinc-900">LHR</div>
+                                    <div class="text-[10px] text-zinc-500">London Heathrow</div>
+                                    <div class="text-xs font-mono font-bold text-zinc-800 mt-0.5">05:55 GMT</div>
+                                </div>
+                            </div>
+
+                            <!-- Seat Details Grid -->
+                            <div class="bg-zinc-50 p-3 rounded-xl grid grid-cols-3 text-center font-mono text-[10px] border border-zinc-100">
+                                <div>
+                                    <div class="text-zinc-400 uppercase">Passenger</div>
+                                    <div class="font-bold text-zinc-800">H. T. Dung</div>
+                                </div>
+                                <div>
+                                    <div class="text-zinc-400 uppercase">Seat</div>
+                                    <div id="cabin-seat-val" class="font-bold text-doodle text-xs">34K</div>
+                                </div>
+                                <div>
+                                    <div class="text-zinc-400 uppercase">Gate</div>
+                                    <div class="font-bold text-zinc-800">B04</div>
+                                </div>
+                            </div>
+
+                            <!-- Barcode -->
+                            <div class="mt-4 pt-3 border-t border-dashed border-zinc-200 flex items-center justify-between font-mono text-[8px] text-zinc-400">
+                                <span>ETKT-618-SQ-PASS</span>
+                                <div class="tracking-widest font-bold text-zinc-800">||| | |||| |||</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PROJECT 02: SCOOT MOBILE COMPANION ================= -->
+            <div class="bg-charcoalCard border border-zinc-700/80 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+                
+                <div class="flex flex-wrap items-center justify-between pb-6 border-b border-zinc-800 gap-4">
+                    <div>
+                        <span class="font-hand text-xl text-amber-300 font-bold">// Exhibit 02 &bull; Mobile &amp; Ancillary Funnel</span>
+                        <h3 class="text-3xl sm:text-4xl font-serif text-white mt-1">
+                            Scoot &bull; 8-Step Clutter &harr; 1-Click FlyBagEat Bundle
+                        </h3>
+                    </div>
+                    <span class="font-mono text-xs text-amber-300">&larr; Drag center slider to compare &rarr;</span>
+                </div>
+
+                <!-- Interactive Comparison Slider -->
+                <div id="scoot-split-container" class="relative w-full h-[340px] rounded-2xl overflow-hidden mt-8 border border-zinc-700 select-none bg-zinc-950">
+                    
+                    <!-- Right Layer (AFTER: Optimized Bundle) -->
+                    <div class="absolute inset-0 p-6 flex flex-col justify-center bg-gradient-to-br from-zinc-900 to-zinc-950 text-white">
+                        <div class="max-w-md mx-auto space-y-3">
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">
+                                &check; AFTER: 1-CLICK FLYBAGEAT BUNDLE
+                            </span>
+                            <h4 class="text-xl font-serif font-bold text-white">Integrated Value Package</h4>
+                            <div class="p-4 rounded-xl bg-zinc-900 border border-emerald-500/30 flex items-center justify-between font-mono text-xs">
+                                <div>
+                                    <div class="font-bold text-white">FlyBagEat (+20kg Baggage + Hot Meal)</div>
+                                    <div class="text-emerald-400 text-[11px] font-sans mt-0.5">35% cheaper than individual add-ons</div>
+                                </div>
+                                <span class="px-3 py-1.5 rounded-lg bg-amber-400 text-zinc-950 font-bold font-mono">+45 SGD</span>
+                            </div>
+                            <p class="text-xs text-zinc-400 font-sans">Reduced drop-off rate by 44%; checkout completed in under 45 seconds.</p>
+                        </div>
+                    </div>
+
+                    <!-- Left Layer (BEFORE: 8-Step Clutter) -->
+                    <div id="scoot-split-overlay" class="absolute inset-0 p-6 flex flex-col justify-center bg-zinc-900 border-r-2 border-rose-500 overflow-hidden" style="width: 50%;">
+                        <div class="max-w-md mx-auto space-y-3 text-zinc-200">
+                            <span class="px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 font-mono text-[10px] font-bold">
+                                &times; BEFORE: 8 MANUAL STEPS (44% DROP-OFF)
+                            </span>
+                            <h4 class="text-xl font-serif font-bold text-zinc-100">Disjointed Add-On Pages</h4>
+                            <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2 font-mono text-xs text-zinc-400">
+                                <div class="flex justify-between"><span>Cabin Bag (7kg):</span><span class="text-white">$0</span></div>
+                                <div class="flex justify-between"><span>Check-in (15kg):</span><span class="text-rose-400">+$38 SGD</span></div>
+                                <div class="flex justify-between"><span>Meal Selection:</span><span class="text-rose-400">+$18 SGD</span></div>
+                            </div>
+                            <p class="text-[11px] text-rose-400 font-mono">Hidden costs emerged at final screen, driving passenger frustration.</p>
+                        </div>
+                    </div>
+
+                    <!-- Split Handle -->
+                    <div id="scoot-split-handle" class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize flex items-center justify-center z-20 shadow-2xl" style="left: 50%;">
+                        <div class="w-7 h-7 rounded-full bg-white text-zinc-950 flex items-center justify-center font-bold text-xs shadow-lg">
+                            &harr;
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= SECTION 5: INTERACTIVE LAB (CREAM PAPER) ================= -->
+    <section class="paper-grain text-ink py-20 px-4 sm:px-6 lg:px-8 border-b border-stone-300">
+        <div class="max-w-5xl mx-auto">
+            
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-10 gap-2">
+                <div>
+                    <h2 class="text-4xl sm:text-5xl font-serif text-ink tracking-tight">Defensive UX &amp; Biometrics</h2>
+                    <p class="text-xs font-mono text-stone-500 mt-1">KRISFLYER ONE-ID: GLUID TRANSITION UNDER REAL-WORLD FAILURES</p>
+                </div>
+                <span class="font-hand text-2xl text-doodle font-semibold">
+                    "Always design the error state first!" ✎
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-8 rounded-3xl border-2 border-stone-300 shadow-md">
+                
+                <!-- Phone Simulator -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="w-[280px] bg-zinc-950 rounded-[36px] p-4 text-white font-mono border-4 border-zinc-800 shadow-2xl relative">
+                        <div class="phone-notch mb-3"></div>
+                        
+                        <div class="flex items-center justify-between text-[10px] text-zinc-400 pb-2 border-b border-zinc-800">
+                            <span>KrisFlyer One-ID</span>
+                            <span class="text-emerald-400">&bull; Gate B04</span>
+                        </div>
+
+                        <!-- Dynamic Stage -->
+                        <div id="biometric-stage" class="py-8 min-h-[220px] flex flex-col items-center justify-center text-center space-y-3">
+                            <div class="w-16 h-16 rounded-full border-2 border-dashed border-doodleLight flex items-center justify-center">
+                                <span class="text-2xl">📸</span>
+                            </div>
+                            <div class="text-xs font-bold font-sans">Ready for Face Scan / NFC</div>
+                            <p class="text-[10px] text-zinc-400 font-sans max-w-[180px]">Align face with camera or tap passport chip against phone</p>
+                        </div>
+
+                        <div class="pt-2 border-t border-zinc-800 text-center text-[9px] text-zinc-500">
+                            ICAO 9303 Compliant &bull; SIA SafeGate
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulation Action Controls -->
+                <div class="md:col-span-7 space-y-5">
+                    <div class="space-y-2">
+                        <span class="font-mono text-xs text-doodle font-bold uppercase">// Try simulating edge conditions:</span>
+                        <h3 class="text-2xl font-serif text-ink">Graceful Degradation at the Boarding Gate</h3>
+                        <p class="text-sm text-stone-600 font-light leading-relaxed">
+                            When ambient airport sunlight causes camera glare or passport NFC times out, the user should never be trapped in a loading loop. The UI immediately reveals an offline QR pass without blocking the line.
+                        </p>
+                    </div>
+
+                    <!-- Simulator Buttons -->
+                    <div class="flex flex-wrap gap-3 pt-2 font-mono text-xs">
+                        <button onclick="testBiometric('success')" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition-all shadow-sm">
+                            &check; Simulate FaceID Success
+                        </button>
+                        <button onclick="testBiometric('glare')" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold transition-all shadow-sm">
+                            ! Simulate Sunlight Glare
+                        </button>
+                        <button onclick="testBiometric('reset')" class="px-4 py-2.5 rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-700 transition-all">
+                            Reset
+                        </button>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200 font-mono text-xs text-stone-600">
+                        <span class="text-doodle font-bold">Measured Result:</span> 0 seconds gate queue delay, certified by Singapore Airlines Ground Ops.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= SECTION 6: FUN FACTS & BEHIND THE SCENES (CHARCOAL CANVAS) ================= -->
+    <section class="charcoal-grain text-white py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
+        <div class="max-w-5xl mx-auto">
+            
+            <div class="text-center mb-12">
+                <span class="font-hand text-2xl text-doodleLight -rotate-1 inline-block font-semibold">
+                    A little bit about my working style &bull; ✎
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-serif tracking-tight text-white mt-1">
+                    Fun Facts.
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
+                
+                <!-- Fact 1 -->
+                <div class="bg-charcoalCard p-6 rounded-2xl border border-zinc-800 hover:border-doodle/50 transition-colors relative group">
+                    <div class="font-hand text-doodleLight text-4xl mb-2">☕</div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-1">Cold Brew &amp; Code</h3>
+                    <p class="text-xs text-zinc-400 font-light leading-relaxed">
+                        I write clean CSS and inspect component trees as comfortably as I create Figma components.
+                    </p>
+                    <span class="font-hand text-xs text-doodleLight mt-3 block">// zero handoff gap</span>
+                </div>
+
+                <!-- Fact 2 -->
+                <div class="bg-charcoalCard p-6 rounded-2xl border border-zinc-800 hover:border-doodle/50 transition-colors relative group">
+                    <div class="font-hand text-doodleLight text-4xl mb-2">✈️</div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-1">Aviation Geek</h3>
+                    <p class="text-xs text-zinc-400 font-light leading-relaxed">
+                        Tested TestFlight builds directly at boarding gates in Changi T3 to observe passenger behavior.
+                    </p>
+                    <span class="font-hand text-xs text-doodleLight mt-3 block">// real field research</span>
+                </div>
+
+                <!-- Fact 3 -->
+                <div class="bg-charcoalCard p-6 rounded-2xl border border-zinc-800 hover:border-doodle/50 transition-colors relative group">
+                    <div class="font-hand text-doodleLight text-4xl mb-2">🎨</div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-1">Token Purist</h3>
+                    <p class="text-xs text-zinc-400 font-light leading-relaxed">
+                        Strict 8pt spacing grid believer. If a hex code doesn't map to a semantic token, it doesn't ship.
+                    </p>
+                    <span class="font-hand text-xs text-doodleLight mt-3 block">// WCAG AA compliant</span>
+                </div>
+
+                <!-- Fact 4 -->
+                <div class="bg-charcoalCard p-6 rounded-2xl border border-zinc-800 hover:border-doodle/50 transition-colors relative group">
+                    <div class="font-hand text-doodleLight text-4xl mb-2">✌️</div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-1">Fast Prototyper</h3>
+                    <p class="text-xs text-zinc-400 font-light leading-relaxed">
+                        Clickable prototypes beat 30-page functional spec documents every single time.
+                    </p>
+                    <span class="font-hand text-xs text-doodleLight mt-3 block">// ship to learn</span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= SECTION 7: THANK YOU & CONTACT (CREAM POSTCARD AESTHETIC) ================= -->
+    <section id="contact" class="paper-grain text-ink py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-3xl border-2 border-stone-300 shadow-xl relative">
+            
+            <!-- Hand-drawn stamp in corner -->
+            <div class="absolute top-6 right-6 w-20 h-20 border-2 border-dashed border-doodle rounded-xl flex flex-col items-center justify-center font-mono text-[9px] text-doodle rotate-6 hidden sm:flex">
+                <span>AIR MAIL</span>
+                <span class="font-bold text-xs mt-0.5">SIA &bull; SG</span>
+                <span>2026</span>
+            </div>
+
+            <div class="max-w-xl">
+                <span class="font-hand text-2xl text-doodle font-semibold -rotate-1 inline-block">
+                    Let's collaborate on your next release ✎
+                </span>
+                
+                <h2 class="text-4xl sm:text-6xl font-serif text-ink tracking-tight mt-1 mb-4">
+                    Thank you.
+                </h2>
+
+                <p class="text-sm text-stone-600 font-light leading-relaxed mb-8">
+                    Whether you are scaling an enterprise design system, reimagining a mobile booking funnel, or looking for an engineering-aware Product Designer for your team, I'd love to connect.
+                </p>
+
+                <!-- Direct Action Buttons -->
+                <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+                    <button onclick="copyToClipboard('htd.0910.99@gmail.com', 'Email copied: htd.0910.99@gmail.com!')" class="px-5 py-3 rounded-xl bg-charcoal hover:bg-doodle text-white font-bold transition-all shadow-md flex items-center gap-2">
+                        <span>Email: htd.0910.99@gmail.com</span>
+                        <span>📋</span>
+                    </button>
+
+                    <button onclick="copyToClipboard('0849374833', 'Phone copied: 0849 374 833!')" class="px-5 py-3 rounded-xl bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-800 font-bold transition-all flex items-center gap-2">
+                        <span>Tel: (+84) 0849 374 833</span>
+                        <span>📞</span>
+                    </button>
+
+                    <button onclick="window.print()" class="px-4 py-3 rounded-xl bg-doodle/10 hover:bg-doodle/20 text-doodle font-bold border border-doodle/30 transition-all">
+                        Print / Save PDF &uarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Sign-off -->
+            <div class="mt-12 pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-stone-500">
+                <div>&copy; 2026 Huỳnh Tấn Dũng &bull; Designed &amp; Coded with Handcrafted Care.</div>
+                <div class="flex items-center gap-4 text-[11px]">
+                    <a href="mailto:htd.0910.99@gmail.com" class="hover:text-doodle">Email</a>
+                    <a href="tel:0849374833" class="hover:text-doodle">Phone</a>
+                    <a href="#" class="hover:text-doodle">Back to Top &uarr;</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Web Audio Synthesizer for tactile click feedback
+        let audioCtx = null;
+        function playTactileTone(freq = 480, duration = 0.05) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Audio policy guard
+            }
+        }
+
+        // Toast Feedback System
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 2400);
+        }
+
+        // Copy to clipboard helper
+        function copyToClipboard(text, msg) {
+            playTactileTone(540);
+            const input = document.createElement('input');
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            try {
+                document.execCommand('copy');
+                showToast(msg || 'Copied to clipboard');
+            } catch (err) {
+                showToast('Unable to copy');
+            }
+            document.body.removeChild(input);
+        }
+
+        // Live Token Radius Adjuster
+        function changeTokenRadius(val) {
+            document.getElementById('token-radius-label').innerText = `${val}px`;
+            document.getElementById('token-code-radius').innerText = `${val}px`;
+            document.getElementById('token-test-button').style.borderRadius = `${val}px`;
+        }
+
+        // Project 1: Cabin Class Switcher
+        function switchCabinClass(tier) {
+            playTactileTone(tier === 'Economy' ? 440 : 580);
+            const btnEcon = document.getElementById('cabin-btn-econ');
+            const btnBiz = document.getElementById('cabin-btn-biz');
+            const tag = document.getElementById('cabin-tier-tag');
+            const seat = document.getElementById('cabin-seat-val');
+            const card = document.getElementById('sia-ticket-card');
+
+            if (tier === 'Economy') {
+                btnEcon.className = 'px-3 py-1 rounded-xl bg-doodle text-white font-bold transition-all';
+                btnBiz.className = 'px-3 py-1 rounded-xl text-zinc-400 hover:text-white transition-all';
+                tag.innerText = 'Economy Class';
+                tag.className = 'px-2.5 py-0.5 rounded-full bg-indigo-50 text-doodle text-[10px] font-mono font-bold uppercase';
+                seat.innerText = '34K';
+                card.style.borderTopColor = '#6366f1';
+                showToast('Morphed ticket to SIA Economy Class');
+            } else {
+                btnBiz.className = 'px-3 py-1 rounded-xl bg-amber-400 text-zinc-950 font-bold transition-all';
+                btnEcon.className = 'px-3 py-1 rounded-xl text-zinc-400 hover:text-white transition-all';
+                tag.innerText = 'Business Class';
+                tag.className = 'px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase';
+                seat.innerText = '11A';
+                card.style.borderTopColor = '#f59e0b';
+                showToast('Morphed ticket to SIA Business Class');
+            }
+        }
+
+        // Project 2: Scoot Before/After Drag Slider
+        const scootContainer = document.getElementById('scoot-split-container');
+        const scootOverlay = document.getElementById('scoot-split-overlay');
+        const scootHandle = document.getElementById('scoot-split-handle');
+        let isScootDragging = false;
+
+        function updateScootSlider(clientX) {
+            if (!scootContainer) return;
+            const rect = scootContainer.getBoundingClientRect();
+            let offsetX = clientX - rect.left;
+            if (offsetX < 30) offsetX = 30;
+            if (offsetX > rect.width - 30) offsetX = rect.width - 30;
+            const percent = (offsetX / rect.width) * 100;
+            scootOverlay.style.width = `${percent}%`;
+            scootHandle.style.left = `${percent}%`;
+        }
+
+        if (scootHandle) {
+            scootHandle.addEventListener('mousedown', () => { isScootDragging = true; });
+            window.addEventListener('mouseup', () => { isScootDragging = false; });
+            window.addEventListener('mousemove', (e) => {
+                if (!isScootDragging) return;
+                updateScootSlider(e.clientX);
+            });
+
+            scootHandle.addEventListener('touchstart', () => { isScootDragging = true; }, { passive: true });
+            window.addEventListener('touchend', () => { isScootDragging = false; });
+            window.addEventListener('touchmove', (e) => {
+                if (!isScootDragging || !e.touches[0]) return;
+                updateScootSlider(e.touches[0].clientX);
+            }, { passive: true });
+        }
+
+        // Section 5: Biometric Scanner Simulation
+        function testBiometric(status) {
+            playTactileTone(status === 'success' ? 620 : 320);
+            const stage = document.getElementById('biometric-stage');
+
+            if (status === 'success') {
+                stage.innerHTML = `
+                    <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-2xl animate-bounce">
+                        &check;
+                    </div>
+                    <div class="text-xs font-bold font-sans text-white">Identity Verified (KrisFlyer One-ID)</div>
+                    <p class="text-[10px] text-emerald-300 font-sans">Gate B04 unlocked &bull; Seat 34K</p>
+                `;
+                showToast('Biometric Match: 100% Verified');
+            } else if (status === 'glare') {
+                stage.innerHTML = `
+                    <div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-2xl">
+                        !
+                    </div>
+                    <div class="text-xs font-bold font-sans text-amber-300">Camera Glare Detected</div>
+                    <div class="p-2 rounded bg-zinc-900 border border-zinc-800 text-[9px] text-zinc-300">
+                        Offline Apple Wallet QR Pass Activated
+                    </div>
+                    <button onclick="testBiometric('success')" class="text-[10px] text-doodleLight underline">
+                        Tap to scan QR manually &rarr;
+                    </button>
+                `;
+                showToast('Triggered Non-blocking Fallback Pass');
+            } else {
+                stage.innerHTML = `
+                    <div class="w-16 h-16 rounded-full border-2 border-dashed border-doodleLight flex items-center justify-center">
+                        <span class="text-2xl">📸</span>
+                    </div>
+                    <div class="text-xs font-bold font-sans">Ready for Face Scan / NFC</div>
+                    <p class="text-[10px] text-zinc-400 font-sans max-w-[180px]">Align face with camera or tap passport chip against phone</p>
+                `;
+                showToast('Biometric scanner reset');
+            }
+        }
+    </script>
+</body>
+</html>
